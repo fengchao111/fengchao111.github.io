@@ -55,6 +55,8 @@
 			
 				<li><a href="/">主页</a></li>
 	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
 				<li><a href="/tags/随笔/">随笔</a></li>
 	        
 			</ul>
@@ -113,6 +115,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -130,12 +134,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -172,18 +178,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一.创建Web项目：<br><a href="https://www.cnblogs.com/1314wamm/p/7475771.html" target="_blank" rel="noopener">https://www.cnblogs.com/1314wamm/p/7475771.html</a></p>
-<p>感觉重要的点;<br>1.在选择web项目时有两个webapp，这时看清楚应该选择maven-crchettype-weapp<br>2.部署项目到tomcat时，<br>a.在porject structure中配置Web项目的访问路径(Modules)<br>b.在porject structure选择部署的包的位置（out或target）<br>3.执行mvn install时会生成target文件夹</p>
-<p>war与war exploded的区别：<br><a href="https://blog.csdn.net/xlgen157387/article/details/56498938" target="_blank" rel="noopener">https://blog.csdn.net/xlgen157387/article/details/56498938</a></p>
-<p>out与target：</p>
-<p>二.搭建框架<br><a href="https://blog.csdn.net/evankaka/article/details/48785513" target="_blank" rel="noopener">https://blog.csdn.net/evankaka/article/details/48785513</a><br>1.这里是关键，web.xml是用来起动sping、spingMVC<br>2.spring-mybatis是spring整合mybatis后的配置文件，在这个配置文件中加载mybatis的配置和加载mapper（动态sql文件）</p>
-<p>3.spring-MVC中引入整合后的spring配置文件，加载jdbc配置信息，配置注解扫描包</p>
-<p>4.在web.xml中配置监听器，和启动sping、spingMVC（DispatcherServlet）<br>Spring中的监听器：<br><a href="https://blog.csdn.net/jinwufeiyang/article/details/52859113" target="_blank" rel="noopener">https://blog.csdn.net/jinwufeiyang/article/details/52859113</a><br>ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。</p>
-
+        <p>一.创建Web项目：<br>
+        
       
 
       
-    </div>
+    </p></div>
     <div class="article-info article-info-index">
       
       
