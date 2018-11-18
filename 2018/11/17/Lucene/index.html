@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Lucene | 冯超</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一.solr是基于lucene的高效的全文检索搜索应用服务器:1.用户可以通过http请求，向搜索引擎服务器提交一定格式的xml文件，生成索引。2.也可以通过http get操作提出查询请求，得到xml/json格式的返回结果。 二.结构化数据和非结构化数据:1.结构化数据:具有固定格式或有限长度的数据，例如数据库，元数据。2.非结构化:指不定长度或无固定格式的数据。例如word文档。3.半结构">
+  <meta name="description" content="一.solr是基于lucene的高效的全文检索搜索应用服务器:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lucene">
 <meta property="og:url" content="http://yoursite.com/2018/11/17/Lucene/index.html">
 <meta property="og:site_name" content="冯超">
-<meta property="og:description" content="一.solr是基于lucene的高效的全文检索搜索应用服务器:1.用户可以通过http请求，向搜索引擎服务器提交一定格式的xml文件，生成索引。2.也可以通过http get操作提出查询请求，得到xml/json格式的返回结果。 二.结构化数据和非结构化数据:1.结构化数据:具有固定格式或有限长度的数据，例如数据库，元数据。2.非结构化:指不定长度或无固定格式的数据。例如word文档。3.半结构">
+<meta property="og:description" content="一.solr是基于lucene的高效的全文检索搜索应用服务器:">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-18T03:44:51.115Z">
+<meta property="og:updated_time" content="2018-11-18T03:48:51.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lucene">
-<meta name="twitter:description" content="一.solr是基于lucene的高效的全文检索搜索应用服务器:1.用户可以通过http请求，向搜索引擎服务器提交一定格式的xml文件，生成索引。2.也可以通过http get操作提出查询请求，得到xml/json格式的返回结果。 二.结构化数据和非结构化数据:1.结构化数据:具有固定格式或有限长度的数据，例如数据库，元数据。2.非结构化:指不定长度或无固定格式的数据。例如word文档。3.半结构">
+<meta name="twitter:description" content="一.solr是基于lucene的高效的全文检索搜索应用服务器:">
   
     <link rel="alternative" href="/atom.xml" title="冯超" type="application/atom+xml">
   
@@ -162,8 +162,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<h1 id="一-solr是基于lucene的高效的全文检索搜索应用服务器"><a href="#一-solr是基于lucene的高效的全文检索搜索应用服务器" class="headerlink" title="一.solr是基于lucene的高效的全文检索搜索应用服务器:"></a>一.solr是基于lucene的高效的全文检索搜索应用服务器:</h1><p>1.用户可以通过http请求，向搜索引擎服务器提交一定格式的xml文件，生成索引。<br>2.也可以通过http get操作提出查询请求，得到xml/json格式的返回结果。</p>
+        <h1 id="一-solr是基于lucene的高效的全文检索搜索应用服务器"><a href="#一-solr是基于lucene的高效的全文检索搜索应用服务器" class="headerlink" title="一.solr是基于lucene的高效的全文检索搜索应用服务器:"></a>一.solr是基于lucene的高效的全文检索搜索应用服务器:</h1><a id="more"></a>    
+<p>1.用户可以通过http请求，向搜索引擎服务器提交一定格式的xml文件，生成索引。<br>2.也可以通过http get操作提出查询请求，得到xml/json格式的返回结果。</p>
 <h1 id="二-结构化数据和非结构化数据"><a href="#二-结构化数据和非结构化数据" class="headerlink" title="二.结构化数据和非结构化数据:"></a>二.结构化数据和非结构化数据:</h1><p>1.结构化数据:具有固定格式或有限长度的数据，例如数据库，元数据。<br>2.非结构化:指不定长度或无固定格式的数据。例如word文档。<br>3.半结构化的数据:如xml</p>
 <p>非结构化的数据叫全文数据。</p>
 <h1 id="三-对非结构化数据即全文数据的搜索有两种方式"><a href="#三-对非结构化数据即全文数据的搜索有两种方式" class="headerlink" title="三.对非结构化数据即全文数据的搜索有两种方式:"></a>三.对非结构化数据即全文数据的搜索有两种方式:</h1><p>1.顺序扫描法:比如要查找包含某一字符串的文件，就是一个文档一个文档的看，对于每一个文档，从头到尾查找一遍，扫描完所有的文档。<br>2.全文检索的基本思路:将非结构化数据中的一部分提取出来，重新组织，使其变得有一定结构，然后对此有一定结构的数据进行搜索，从而达到搜索快的目的。</p>

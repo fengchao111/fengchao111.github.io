@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>创建Web项目 搭建SSM框架 | 冯超</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一.创建Web项目：https://www.cnblogs.com/1314wamm/p/7475771.html 感觉重要的点;1.在选择web项目时有两个webapp，这时看清楚应该选择maven-crchettype-weapp2.部署项目到tomcat时，a.在porject structure中配置Web项目的访问路径(Modules)b.在porject structure选择部署的">
+  <meta name="description" content="一.创建Web项目：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="创建Web项目 搭建SSM框架">
 <meta property="og:url" content="http://yoursite.com/2018/11/16/创建Web项目-搭建SSM框架/index.html">
 <meta property="og:site_name" content="冯超">
-<meta property="og:description" content="一.创建Web项目：https://www.cnblogs.com/1314wamm/p/7475771.html 感觉重要的点;1.在选择web项目时有两个webapp，这时看清楚应该选择maven-crchettype-weapp2.部署项目到tomcat时，a.在porject structure中配置Web项目的访问路径(Modules)b.在porject structure选择部署的">
+<meta property="og:description" content="一.创建Web项目：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-18T03:44:49.608Z">
+<meta property="og:updated_time" content="2018-11-18T03:49:43.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建Web项目 搭建SSM框架">
-<meta name="twitter:description" content="一.创建Web项目：https://www.cnblogs.com/1314wamm/p/7475771.html 感觉重要的点;1.在选择web项目时有两个webapp，这时看清楚应该选择maven-crchettype-weapp2.部署项目到tomcat时，a.在porject structure中配置Web项目的访问路径(Modules)b.在porject structure选择部署的">
+<meta name="twitter:description" content="一.创建Web项目：">
   
     <link rel="alternative" href="/atom.xml" title="冯超" type="application/atom+xml">
   
@@ -162,14 +162,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<p>一.创建Web项目：<br><a href="https://www.cnblogs.com/1314wamm/p/7475771.html" target="_blank" rel="noopener">https://www.cnblogs.com/1314wamm/p/7475771.html</a></p>
-<p>感觉重要的点;<br>1.在选择web项目时有两个webapp，这时看清楚应该选择maven-crchettype-weapp<br>2.部署项目到tomcat时，<br>a.在porject structure中配置Web项目的访问路径(Modules)<br>b.在porject structure选择部署的包的位置（out或target）<br>3.执行mvn install时会生成target文件夹</p>
+        <h1 id="一-创建Web项目："><a href="#一-创建Web项目：" class="headerlink" title="一.创建Web项目："></a>一.创建Web项目：</h1><a id="more"></a>
+<p><a href="https://www.cnblogs.com/1314wamm/p/7475771.html" target="_blank" rel="noopener">https://www.cnblogs.com/1314wamm/p/7475771.html</a></p>
+<h1 id="感觉重要的点"><a href="#感觉重要的点" class="headerlink" title="感觉重要的点;"></a>感觉重要的点;</h1><p>1.在选择web项目时有两个webapp，这时看清楚应该选择maven-crchettype-weapp<br>2.部署项目到tomcat时，<br>a.在porject structure中配置Web项目的访问路径(Modules)<br>b.在porject structure选择部署的包的位置（out或target）<br>3.执行mvn install时会生成target文件夹</p>
 <p>war与war exploded的区别：<br><a href="https://blog.csdn.net/xlgen157387/article/details/56498938" target="_blank" rel="noopener">https://blog.csdn.net/xlgen157387/article/details/56498938</a></p>
 <p>out与target：</p>
-<p>二.搭建框架<br><a href="https://blog.csdn.net/evankaka/article/details/48785513" target="_blank" rel="noopener">https://blog.csdn.net/evankaka/article/details/48785513</a><br>1.这里是关键，web.xml是用来起动sping、spingMVC<br>2.spring-mybatis是spring整合mybatis后的配置文件，在这个配置文件中加载mybatis的配置和加载mapper（动态sql文件）</p>
-<p>3.spring-MVC中引入整合后的spring配置文件，加载jdbc配置信息，配置注解扫描包</p>
-<p>4.在web.xml中配置监听器，和启动sping、spingMVC（DispatcherServlet）<br>Spring中的监听器：<br><a href="https://blog.csdn.net/jinwufeiyang/article/details/52859113" target="_blank" rel="noopener">https://blog.csdn.net/jinwufeiyang/article/details/52859113</a><br>ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。</p>
+<h1 id="二-搭建框架"><a href="#二-搭建框架" class="headerlink" title="二.搭建框架"></a>二.搭建框架</h1><p><a href="https://blog.csdn.net/evankaka/article/details/48785513" target="_blank" rel="noopener">https://blog.csdn.net/evankaka/article/details/48785513</a><br>1.这里是关键，web.xml是用来起动sping、spingMVC<br>2.spring-mybatis是spring整合mybatis后的配置文件，在这个配置文件中加载mybatis的配置和加载mapper（动态sql文件）<br>3.spring-MVC中引入整合后的spring配置文件，加载jdbc配置信息，配置注解扫描包<br>4.在web.xml中配置监听器，和启动sping、spingMVC（DispatcherServlet）<br>Spring中的监听器：<br><a href="https://blog.csdn.net/jinwufeiyang/article/details/52859113" target="_blank" rel="noopener">https://blog.csdn.net/jinwufeiyang/article/details/52859113</a><br>ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。</p>
 
       
 
