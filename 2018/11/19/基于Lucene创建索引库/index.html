@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="冯超">
 <meta property="og:description" content="使用indexwriter对象创建索引">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-19T10:00:10.374Z">
+<meta property="og:updated_time" content="2018-11-20T14:04:21.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Lucene创建索引库">
 <meta name="twitter:description" content="使用indexwriter对象创建索引">
@@ -163,7 +163,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="使用indexwriter对象创建索引"><a href="#使用indexwriter对象创建索引" class="headerlink" title="使用indexwriter对象创建索引"></a>使用indexwriter对象创建索引</h1><a id="more"></a>
-<h1 id="1-1-实现步骤"><a href="#1-1-实现步骤" class="headerlink" title="1.1. 实现步骤"></a>1.1. 实现步骤</h1><p>　　第一步：创建一个java工程，并导入jar包。</p>
+<h1 id="1-1-实现步骤"><a href="#1-1-实现步骤" class="headerlink" title="1.1. 实现步骤"></a>1.1. 实现步骤</h1><p>整体思想 :1.采集文件系统中的文档数据，放入Lucene的Document中<br>         2.写入索引库（）对文档(Document)进行分词创建索引（利用IndexWriter对象 ）<br>　　第一步：创建一个java工程，并导入jar包。</p>
 <p>　　第二步：创建一个indexwriter对象。</p>
 <p>　　　　1）指定索引库的存放位置Directory对象</p>
 <p>　　　　2）指定一个分析器，对文档内容进行分析。</p>
@@ -171,112 +171,78 @@
 <p>　　第三步：创建field对象，将field添加到document对象中。</p>
 <p>　　第四步：使用indexwriter对象将document对象写入索引库，此过程进行索引创建。并将索引和document对象写入索引库。</p>
 <p>　　第五步：关闭IndexWriter对象。</p>
-<h1 id="1-2-Field域的属性"><a href="#1-2-Field域的属性" class="headerlink" title="1.2. Field域的属性"></a>1.2. Field域的属性</h1><p>　　是否分析：是否对域的内容进行分词处理。前提是要对域的内容进行查询。</p>
-<p>　　是否索引：将Field分析后的词或整个Field值进行索引，只有索引方可搜索到。</p>
-<p>　　　　比如：商品名称、商品简介分析后进行索引，订单号、身份证号不用分析但也要索引，这些将来都要作为查询条件。</p>
-<p>　　是否存储：将Field值存储在文档中，存储在文档中的Field才可以从Document中获取</p>
-<p>　　　　比如：商品名称、订单号，凡是将来要从Document中获取的Field都要存储。</p>
-<h1 id="1-3-代码实现"><a href="#1-3-代码实现" class="headerlink" title="1.3. 代码实现"></a>1.3. 代码实现</h1><p>//创建索引</p>
-<pre><code>@Test
+<h1 id="1-2-Field域的属性"><a href="#1-2-Field域的属性" class="headerlink" title="1.2. Field域的属性"></a>1.2. Field域的属性</h1><p>　　是否分词:</p>
+<pre><code>     　　分词的作用是为了索引
 
-public void createIndex() throws Exception {
+     　　需要分词: 文件名称, 文件内容
 
+     　　不需要分词: 不需要索引的域不需要分词,还有就是分词后无意义的域不需要分词
 
+比如: id, 身份证号
+</code></pre><p> 　　是否索引:</p>
+<pre><code>     　　索引的的目的是为了搜索.
 
-     //指定索引库存放的路径
+     　　需要搜索的域就一定要创建索引,只有创建了索引才能被搜索出来
 
-     //E:\Test\index
+     　　不需要搜索的域可以不创建索引
 
-     Directory directory = FSDirectory.open(new File(&quot;E:\\Test\\index&quot;));
+     　　需要索引: 文件名称, 文件内容, id, 身份证号等
 
-     //索引库还可以存放到内存中
+     　　不需要索引: 比如图片地址不需要创建索引, e:\\xxx.jpg
 
-     //Directory directory = new RAMDirectory();
+              　　　　因为根据图片地址搜索无意义
+</code></pre><p> 　　是否存储:</p>
+<pre><code>     　　存储的目的是为了显示.
+</code></pre><p>　　　　是否存储看个人需要,存储就是将内容放入Document文档对象中保存出来,会额外占用磁盘空间, 如果搜索的时候需要马上显示出来可以放入document中也就是要存储,这样查询显示速度快, 如果不是马上立刻需要显示出来,则不需要存储。     　　</p>
+<h1 id="1-3-代码实现"><a href="#1-3-代码实现" class="headerlink" title="1.3. 代码实现"></a>1.3. 代码实现</h1><p>@Test<br>    public void testIndexCreate() throws Exception{<br>        //***整体思想 ：1.采集文件系统中的文档数据，放入Lucene的Document中<br>        //             2.写入索引库（）对文档(Document)进行分词创建索引（利用IndexWriter对象 ）</p>
+<pre><code>    //创建文档列表，保存多个document
+    List &lt;Document&gt; docList=new ArrayList&lt;Document&gt;();
+    //指定文件所在目录
+    File dir=new File(&quot;E:\\ideaworkpase\\demotest\\searchsource&quot;);
+    //循环取出文件
+    for(File file:dir.listFiles()){
+        // 文件名称
+        String fileName=file.getName();
+        //文件内容
+        String fileContext= FileUtils.readFileToString(file);
+        //文件大小
+        Long fileSize=FileUtils.sizeOf(file);
 
-     //创建一个标准分析器
+        //文档对象，文件系统中的一个文件就是一个document对象
+        Document doc=new Document();
+        //第一个参数：域名
+        //第二个参数：域值
+        //第三个参数：是否存储
+        TextField nameField=new TextField(&quot;fileName&quot;,fileName, Field.Store.YES);
+        TextField contextField=new TextField(&quot;fileContext&quot;,fileContext, Field.Store.YES);
+        TextField sizeField=new TextField(&quot;fileSize&quot;,fileSize.toString(), Field.Store.YES);
 
-     Analyzer analyzer = new StandardAnalyzer();
+        //将所有的域存入文档中
+        doc.add(nameField);
+        doc.add(contextField);
+        doc.add(sizeField);
+        //将文档存入文档集合中
+        docList.add(doc);
+    }
 
-     //创建indexwriterCofig对象
+    //创建分词器，StandarAnalyzer标准分词器，对英文分词效果很好，对中文单字分词
+    Analyzer analyzer=new StandardAnalyzer();
 
-     //第一个参数： Lucene的版本信息，可以选择对应的lucene版本也可以使用LATEST
+    //指定索引和文档存储的路径
+    Directory directory= FSDirectory.open(new File(&quot;E:\\ideaworkpase\\demotest\\luceneindex&quot;));
+    //创建写对象的初始化对象
+    IndexWriterConfig config=new IndexWriterConfig(Version.LUCENE_4_10_3,analyzer);
+    //创建索引和文档写对象
+    IndexWriter indexWriter=new IndexWriter(directory,config);
 
-     //第二根参数：分析器对象
-
-     IndexWriterConfig config = new IndexWriterConfig(Version.LATEST, analyzer);
-
-     //创建indexwriter对象
-
-     IndexWriter indexWriter = new IndexWriter(directory, config);
-
-     //原始文档的路径E:\Test\searchsource
-
-     File dir = new File(&quot;E:\\Test\\searchsource&quot;);
-
-     for (File f : dir.listFiles()) {
-
-          //文件名
-
-          String fileName = f.getName();
-
-          //文件内容
-
-          String fileContent = FileUtils.readFileToString(f);
-
-          //文件路径
-
-          String filePath = f.getPath();
-
-          //文件的大小
-
-          long fileSize  = FileUtils.sizeOf(f);
-
-          //创建文件名域
-
-          //第一个参数：域的名称
-
-          //第二个参数：域的内容
-
-          //第三个参数：是否存储
-
-          Field fileNameField = new TextField(&quot;filename&quot;, fileName, Store.YES);
-
-          //文件内容域
-
-          Field fileContentField = new TextField(&quot;content&quot;, fileContent, Store.YES);
-
-          //文件路径域（不分析、不索引、只存储）
-
-          Field filePathField = new StoredField(&quot;path&quot;, filePath);
-
-          //文件大小域
-
-          Field fileSizeField = new LongField(&quot;size&quot;, fileSize, Store.YES);
-
-
-
-          //创建document对象
-
-          Document document = new Document();
-
-          document.add(fileNameField);
-
-          document.add(fileContentField);
-
-          document.add(filePathField);
-
-          document.add(fileSizeField);
-
-          //创建索引，并写入索引库
-
-          indexWriter.addDocument(document);
-
-     }
-
-     //关闭indexwriter
-
-     indexWriter.close();
-
+    //将文档加入索引和文档的写对象中
+    for(Document doc:docList){
+        indexWriter.addDocument(doc);
+    }
+    //提交
+    indexWriter.close();
+    //关闭流
+    indexWriter.close();
 }
 </code></pre>
       
