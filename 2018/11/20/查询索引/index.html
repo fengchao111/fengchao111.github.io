@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>查询索引 | 冯超</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.1. 实现步骤第一步：创建一个Directory对象，也就是索引库存放的位置。 第二步：创建一个indexReader对象，需要指定Directory对象。 第三步：创建一个indexsearcher对象，需要指定IndexReader对象 第四步：创建一个TermQuery对象，指定查询的域和查询的关键词。 第五步：执行查询。 第六步：返回查询结果。遍历查询结果并输出。 第七步：关闭Inde">
+  <meta name="description" content="1.1. 实现步骤">
 <meta property="og:type" content="article">
 <meta property="og:title" content="查询索引">
 <meta property="og:url" content="http://yoursite.com/2018/11/20/查询索引/index.html">
 <meta property="og:site_name" content="冯超">
-<meta property="og:description" content="1.1. 实现步骤第一步：创建一个Directory对象，也就是索引库存放的位置。 第二步：创建一个indexReader对象，需要指定Directory对象。 第三步：创建一个indexsearcher对象，需要指定IndexReader对象 第四步：创建一个TermQuery对象，指定查询的域和查询的关键词。 第五步：执行查询。 第六步：返回查询结果。遍历查询结果并输出。 第七步：关闭Inde">
+<meta property="og:description" content="1.1. 实现步骤">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-20T13:53:33.118Z">
+<meta property="og:updated_time" content="2018-11-20T13:59:57.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查询索引">
-<meta name="twitter:description" content="1.1. 实现步骤第一步：创建一个Directory对象，也就是索引库存放的位置。 第二步：创建一个indexReader对象，需要指定Directory对象。 第三步：创建一个indexsearcher对象，需要指定IndexReader对象 第四步：创建一个TermQuery对象，指定查询的域和查询的关键词。 第五步：执行查询。 第六步：返回查询结果。遍历查询结果并输出。 第七步：关闭Inde">
+<meta name="twitter:description" content="1.1. 实现步骤">
   
     <link rel="alternative" href="/atom.xml" title="冯超" type="application/atom+xml">
   
@@ -162,7 +162,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-1-实现步骤"><a href="#1-1-实现步骤" class="headerlink" title="1.1. 实现步骤"></a>1.1. 实现步骤</h1><p><-- more="" --=""><br>第一步：创建一个Directory对象，也就是索引库存放的位置。</--></p>
+        <h1 id="1-1-实现步骤"><a href="#1-1-实现步骤" class="headerlink" title="1.1. 实现步骤"></a>1.1. 实现步骤</h1><a id="more"></a>
+<p>第一步：创建一个Directory对象，也就是索引库存放的位置。</p>
 <p>第二步：创建一个indexReader对象，需要指定Directory对象。</p>
 <p>第三步：创建一个indexsearcher对象，需要指定IndexReader对象</p>
 <p>第四步：创建一个TermQuery对象，指定查询的域和查询的关键词。</p>
@@ -171,24 +172,8 @@
 <p>第七步：关闭IndexReader对象</p>
 <h1 id="1-2-IndexSearcher搜索方法"><a href="#1-2-IndexSearcher搜索方法" class="headerlink" title="1.2.IndexSearcher搜索方法"></a>1.2.IndexSearcher搜索方法</h1><h1 id="1-3-query查询语句对象"><a href="#1-3-query查询语句对象" class="headerlink" title="1.3.query查询语句对象"></a>1.3.query查询语句对象</h1><p>　　对要搜索的信息创建Query查询对象，Lucene会根据Query查询对象生成最终的查询语法，类似关系数据库Sql语法一样Lucene也有自己的查询语法，比如：“name:lucene”表示查询Field的name为“lucene”的文档信息。</p>
 <p>　　1.3.1.使用QueryParser查询<br>　　　　通过QueryParser也可以创建Query，QueryParser提供一个Parse方法，此方法可以直接根据查询语法来查询。Query对象执行的查询语法可通过System.out.println(query);查询。需要使用到分析器。创建索引时使用的分析器和查询索引时使用的分析器要一致。</p>
-<p>　　1.3.2.使用query的子类查询<br>　　　　TermQuery:</p>
-<pre><code>     　　　　根据词进行搜索(只能从文本中进行搜索)
-</code></pre><p>　　　　QueryParser:</p>
-<pre><code>    　　 　　根据域名进行搜索,可以设置默认搜索域,推荐使用. (只能从文本中进行搜索)
-</code></pre><p>　　　　NumericRangeQuery:</p>
-<pre><code>     　　　　从数值范围进行搜索
-</code></pre><p>　　　　BooleanQuery:</p>
-<pre><code>     　　　　组合查询,可以设置组合条件,not and or.从多个域中进行查询
-
-     　　　　　　must相当于and关键字,是并且的意思
-</code></pre><p>   　　　　　　　　should,相当于or关键字或者的意思</p>
-<p>   　　　　　　　　must_not相当于not关键字, 非的意思</p>
-<p>   　　　　　　　　注意:单独使用must_not  或者 独自使用must_not没有任何意义</p>
-<p>　　　　MatchAllDocsQuery:</p>
-<pre><code>     　　　　查询出所有文档
-</code></pre><p>　　　　MultiFieldQueryParser:</p>
-<pre><code>     　　　　可以从多个域中进行查询,只有这些域中有关键词的存在就查询出来
-</code></pre><h1 id="1-4-代码"><a href="#1-4-代码" class="headerlink" title="1.4.代码"></a>1.4.代码</h1><p>复制代码<br> 1 @Test<br> 2 public void testIndexSearch() throws Exception{<br> 3<br> 4     //创建分词器（与创建索引用同样的分词器）<br> 5     Analyzer analyzer=new StandardAnalyzer();<br> 6     //创建查询对象：第一个参数：默认搜索域  第二个参数 ：分词器<br> 7     //默认搜索的作用：如果搜索语法中指定了域名，从指定域中搜索，如果未指定从默认搜索域中搜索<br> 8     QueryParser queryParser=new QueryParser(“fileContext”,analyzer);<br> 9     //查询语法 域名：搜索关键字<br>10     Query query = queryParser.parse(“fileContext:java”);<br>11<br>12<br>13     //指定索引的目录<br>14     Directory directory= FSDirectory.open(new File(“E:\ideaworkpase\demotest\luceneindex”));<br>15     //索引的读取对象<br>16     IndexReader indexReader=IndexReader.open(directory);<br>17     //创建索引的搜索对象<br>18     IndexSearcher indexSearcher=new IndexSearcher(indexReader);<br>19     //搜索：第一个参数：查询语句对象  第二个参数：指定显示记录数<br>20     TopDocs search = indexSearcher.search(query, 10);<br>21     //一共搜索到多少条记录<br>22     System.out.println(“====total===:”+search.totalHits);<br>23<br>24     //从搜索结果对象中获取结果集<br>25     ScoreDoc [] scoreDocs=search.scoreDocs;<br>26     for(ScoreDoc scoreDoc:scoreDocs){<br>27         //获取Id<br>28         int docID=scoreDoc.doc;<br>29         //通过文档ID从硬盘上获取文档<br>30         Document document = indexReader.document(docID);<br>31         //get域名，打印出值<br>32         System.out.println(“+++++fileName++++:”+document.get(“fileName”));<br>33     }</p>
+<p>　　1.3.2.使用query的子类查询<br>　　　　TermQuery:<br>         　　　　根据词进行搜索(只能从文本中进行搜索)<br>　　　　QueryParser:<br>        　　 　　根据域名进行搜索,可以设置默认搜索域,推荐使用. (只能从文本中进行搜索)<br>　　　　NumericRangeQuery:<br>         　　　　从数值范围进行搜索<br>　　　　BooleanQuery:<br>         　　　　组合查询,可以设置组合条件,not and or.从多个域中进行查询<br>         　　　　　　must相当于and关键字,是并且的意思<br>   　　　　　　　　should,相当于or关键字或者的意思<br>   　　　　　　　　must_not相当于not关键字, 非的意思<br>   　　　　　　　　注意:单独使用must_not  或者 独自使用must_not没有任何意义<br>　　　　MatchAllDocsQuery:<br>         　　　　查询出所有文档<br>　　　　MultiFieldQueryParser:<br>         　　　　可以从多个域中进行查询,只有这些域中有关键词的存在就查询出来</p>
+<h1 id="1-4-代码"><a href="#1-4-代码" class="headerlink" title="1.4.代码"></a>1.4.代码</h1><p>复制代码<br> 1 @Test<br> 2 public void testIndexSearch() throws Exception{<br> 3<br> 4     //创建分词器（与创建索引用同样的分词器）<br> 5     Analyzer analyzer=new StandardAnalyzer();<br> 6     //创建查询对象：第一个参数：默认搜索域  第二个参数 ：分词器<br> 7     //默认搜索的作用：如果搜索语法中指定了域名，从指定域中搜索，如果未指定从默认搜索域中搜索<br> 8     QueryParser queryParser=new QueryParser(“fileContext”,analyzer);<br> 9     //查询语法 域名：搜索关键字<br>10     Query query = queryParser.parse(“fileContext:java”);<br>11<br>12<br>13     //指定索引的目录<br>14     Directory directory= FSDirectory.open(new File(“E:\ideaworkpase\demotest\luceneindex”));<br>15     //索引的读取对象<br>16     IndexReader indexReader=IndexReader.open(directory);<br>17     //创建索引的搜索对象<br>18     IndexSearcher indexSearcher=new IndexSearcher(indexReader);<br>19     //搜索：第一个参数：查询语句对象  第二个参数：指定显示记录数<br>20     TopDocs search = indexSearcher.search(query, 10);<br>21     //一共搜索到多少条记录<br>22     System.out.println(“====total===:”+search.totalHits);<br>23<br>24     //从搜索结果对象中获取结果集<br>25     ScoreDoc [] scoreDocs=search.scoreDocs;<br>26     for(ScoreDoc scoreDoc:scoreDocs){<br>27         //获取Id<br>28         int docID=scoreDoc.doc;<br>29         //通过文档ID从硬盘上获取文档<br>30         Document document = indexReader.document(docID);<br>31         //get域名，打印出值<br>32         System.out.println(“+++++fileName++++:”+document.get(“fileName”));<br>33     }</p>
 
       
 
